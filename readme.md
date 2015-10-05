@@ -9,14 +9,15 @@ If that matches your needs too, great.  If not, I'm still time ahead, and I get 
 # Features/Requirements (when it's done)
 - Pages and Blog Posts, parsed separately
 - Single point of configuration
-- No complicated templating formats
+- No complicated templating formats (unless jinja2 is complicated)
 - The ability to put arbitrary HTML/Javascript in any given page/post
-- Static "extra" files such as images or CSS, all in one place
+- Static "extra" files such as images or CSS, all in one place, including favicon
 - Single build folder as output
 - Copy the build folder to root or a subdir in your server
 - "Preview" ability, probably through a static file watcher that regenerates the preview folder
 - Simple server for said preview
 - Meta tags are hierarchial.  There is a global set, and they can all be overridden by page (like titles)
+ - We get this almost for free if we use the templating engine appropriately
 - Extra javascript includes in header or footer on a per page basis
 
 # Status
