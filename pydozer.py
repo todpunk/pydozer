@@ -4,7 +4,7 @@ from flask import Flask
 import os
 from pprint import pprint
 import importlib
-
+from gconf import simple_config
 
 # Argument handling
 parser = argparse.ArgumentParser(
@@ -34,23 +34,22 @@ if __name__ == '__main__':
         exit(1)
     else:
         config_module = importlib.import_module(config_file)
-        from gconf import simple_config
         simple_config.update(config_module.simple_config)
 
 
 class Page(object):
     def __init__(self):
-        from gconf import all_pages, simple_config
+        from gconf import all_pages
         all_pages.append(self)
-        self.data = {'title': simple_config['site_title'],
+        self.data = {'config': simple_config['page_config'],
                      'content': ''}
 
 
 class BlogPost(object):
     def __init__(self):
-        from gconf import all_blog_posts, simple_config
+        from gconf import all_blog_posts
         all_blog_posts.append(self)
-        self.data = {'title': simple_config['blog_title'],
+        self.data = {'config': simple_config['blog_config'],
                      'content': '',
                      }
 
@@ -68,7 +67,7 @@ if __name__ == '__main__':
         print('Well, we should build here I guess')
         from example.pages import *
         from example.blog_posts import *
-        from gconf import all_blog_posts, all_pages, simple_config
+        from gconf import all_blog_posts, all_pages
         pprint(simple_config)
     if preview:
         print('We will run a server here when we can serve things')

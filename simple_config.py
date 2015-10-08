@@ -3,14 +3,25 @@ import os
 
 
 this_dir = os.path.join(__file__.replace(os.path.basename(__file__), '')).replace('\\', '\\\\')
-# We just shove this in a json object
+# We just shove this in a json object, note that many of these are defaults and can be overridden by page/post
 config_raw = """
 {
     "content_dir": "%(this_dir)sexample",
     "output_dir": "%(this_dir)sgenerated",
     "templates_dir": "%(this_dir)stemplates",
-    "site_title": "This Site's Title",
-    "blog_title": "This Blog's Title"
+    "site_title": "This Site's Default Title",
+    "page_config": {
+        "page_title": "This Site's Title",
+        "page_default_template": "page.jinja2"
+    },
+    "blog_config": {
+        "title": "This Blog's Title",
+        "blog_base_dir": "/blog",
+        "blog_template": "blog.jinja2",
+        "listing_template": "listing.jinja2",
+        "tags_template": "tags.jinja2",
+        "authors_template": "authors.jinja2"
+    }
 }
 """ % {'this_dir': this_dir}
 print(config_raw)
