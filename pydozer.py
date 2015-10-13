@@ -70,6 +70,9 @@ app = Flask(__name__, static_folder=simple_config['output_dir'], static_url_path
 def hello_world():
     return 'Hello World!'
 
+@app.route('/')
+def root():
+    return app.send_static_file('index.html')
 
 def generate_pages():
     """
@@ -126,6 +129,6 @@ if __name__ == '__main__':
         generate_pages()
     if preview:
         print('We will run a server here when we can serve things')
-        #app.run()
+        app.run()
 
 

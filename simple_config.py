@@ -11,6 +11,7 @@ config_raw = \
     "templates_dir": os.path.join(this_dir, "templates"),
     "site_title": "This Site's Default Title",
     "default_extension": ".html",
+    "start_page": "index.html",
     "page_config": {
         "page_title": "This Site's Title",
         "page_default_template": "page.jinja2"
