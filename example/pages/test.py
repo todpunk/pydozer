@@ -1,6 +1,8 @@
+import os
 from pydozer import Page
 
 test_page = Page()
+test_page.filename = os.path.basename(__file__).replace('.pyc', '').replace('.py', '')
 test_page.data['title'] = "Test Page"
 test_page.data['extra_headers'] = """
     <link rel="stylesheet" href="extra.css" type="text/css" />

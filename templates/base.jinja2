@@ -1,14 +1,16 @@
 <html>
 <head>
-	<title>{{ title }}</title>
+	<title>{{ title }}}</title>
 	<meta name="author" content="Tod Hansmann">
+	{{ extra_headers }}
 </head>
 <body>
 <div id="header">
 	<img src="logo.png" />{{ title }}
 </div>
 <div id="content">
-	{{ content }}
+	{% block content %}
+	{% endblock %}
 </div>
 </body>
 </html>
