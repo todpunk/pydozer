@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 This exists purely to share global scoped variables across modules.  Very important.
 """

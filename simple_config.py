@@ -1,9 +1,10 @@
+# -*- coding: utf-8 -*-
 import json
 import os
 
 
 this_dir = os.path.join(__file__.replace(os.path.basename(__file__), ''))
-# We just shove this in a json object, note that many of these are defaults and can be overridden by page/post
+# note that many of these are defaults and can be overridden by page/post
 config_raw = \
 {
     "content_dir": os.path.join(this_dir, "example"),
@@ -21,8 +22,11 @@ config_raw = \
         "blog_base_dir": "/blog",
         "blog_template": "blog.jinja2",
         "listing_template": "listing.jinja2",
+        "listing_keys_needed": [],
         "tags_template": "tags.jinja2",
-        "authors_template": "authors.jinja2"
+        "tag_template": "tag.jinja2",
+        "authors_template": "authors.jinja2",
+        "author_template": "author.jinja2"
     }
 }
 
