@@ -6,6 +6,7 @@ from flask import Flask
 import os
 import jinja2
 import dateutil.parser
+import math
 from pprint import pprint
 import importlib
 import shutil
@@ -173,10 +174,20 @@ def generate_blog_posts():
         output_filename = os.path.join(output_dir, 'tags' + file_ext)
         with open(output_filename, 'w+') as f:
             f.write(tags_template.render(tags))
-        for tag, posts in tags.iteritems():
-            output_filename = os.path.join(output_dir, tag + file_ext)
-            with open(output_filename, 'w+') as f:
-                f.write(tag_template.render({tag: posts}))
+		for tag, posts in tags.iteritems():
+			if 'tag_pagination_num' in blog_config:
+				page_limit = blog_config['tag_pagination_num']
+				ranges = range(1, math.floor(len(posts) / page_limit) + ((len(posts) / page_limit) > 1) + 1
+				for page_num in ranges:
+					file_num = str(page_num)
+					offset = (page_num - 1) * page_limit
+					output_filename = os.path.join(output_dir, tag + file_num + file_ext)
+					with open(output_filename, 'w+') as f:
+						f.write(tag_template.render({tag: posts[offset:offset+page_limit]}))
+			else:
+				output_filename = os.path.join(output_dir, tag + file_ext)
+				with open(output_filename, 'w+') as f:
+					f.write(tag_template.render({tag: posts}))
 
     if authors_template and author_template:
         output_filename = os.path.join(output_dir, 'authors' + file_ext)

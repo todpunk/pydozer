@@ -22,11 +22,14 @@ config_raw = \
         "blog_base_dir": "/blog",
         "blog_template": "blog.jinja2",
         "listing_template": "listing.jinja2",
+		"listing_pagination_num": 5,
         "listing_keys_needed": [],
         "tags_template": "tags.jinja2",
         "tag_template": "tag.jinja2",
+		"tag_pagination_num": 5,
         "authors_template": "authors.jinja2",
         "author_template": "author.jinja2"
+		"author_pagination_num": 5,
     }
 }
 
