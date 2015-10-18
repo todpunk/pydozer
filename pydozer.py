@@ -194,7 +194,7 @@ def generate_blog_posts():
     if tags_template and tag_template:
         output_filename = os.path.join(output_dir, 'tags' + file_ext)
         with open(output_filename, 'w+') as f:
-            f.write(tags_template.render({'tags': tags}))
+            f.write(tags_template.render({'tags': tags, 'title': 'Tags'}))
         for tag, posts in tags.iteritems():
             if 'tag_pagination_num' in blog_config:
                 page_limit = blog_config['tag_pagination_num']
@@ -222,7 +222,7 @@ def generate_blog_posts():
     if authors_template and author_template:
         output_filename = os.path.join(output_dir, 'authors' + file_ext)
         with open(output_filename, 'w+') as f:
-            f.write(authors_template.render({'authors': authors}))
+            f.write(authors_template.render({'authors': authors, 'title': 'Authors'}))
         for author, posts in authors.iteritems():
             if 'author_pagination_num' in blog_config:
                 page_limit = blog_config['author_pagination_num']
