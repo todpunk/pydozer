@@ -21,4 +21,4 @@ If that matches your needs too, great.  If not, I'm still time ahead, and I get 
 - Extra javascript includes in header or footer on a per page basis
 
 # Status
-In theory I'm at the last step of getting pagination working: testing.  So finish testing that (doesn't run right now) and then flesh out an example template set.  This weekend we'll generate an actual site with it.
+Completely usable.  We're using it in more and more generated sites now, and we'd love to hear if you run into any snags.
