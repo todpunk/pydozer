@@ -2,7 +2,7 @@
 import argparse
 import datetime
 
-from flask import Flask
+from flask import Flask, make_response
 import os
 import jinja2
 import dateutil.parser
@@ -11,7 +11,6 @@ from pprint import pprint
 import importlib
 import shutil
 from gconf import simple_config
-from flask import make_response
 from functools import update_wrapper
 
 # Argument handling
@@ -86,6 +85,13 @@ def nocache(f):
         resp.cache_control.no_cache = True
         return resp
     return update_wrapper(new_func, f)
+
+
+@app.after_request
+def nocache_response(response):
+    response.headers['Cache-Control'] = 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0, max-age=0'
+    response.headers['Expires'] = '-1'
+    return response
 
 
 @app.route('/hello')
