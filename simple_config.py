@@ -11,6 +11,7 @@ config_raw = \
     "output_dir": os.path.join(this_dir, "generated"),
     "templates_dir": os.path.join(this_dir, "templates"),
     "site_title": "This Site's Default Title",
+    "descending": True,
     "default_extension": ".html",
     "start_page": "index.html",
     "page_config": {
@@ -19,17 +20,17 @@ config_raw = \
     },
     "blog_config": {
         "title": "This Blog's Title",
-        "blog_base_dir": "/blog",
+        "blog_base_dir": "blog",
         "blog_template": "blog.jinja2",
         "listing_template": "listing.jinja2",
-		"listing_pagination_num": 5,
+        "listing_pagination_num": 3,
         "listing_keys_needed": [],
         "tags_template": "tags.jinja2",
         "tag_template": "tag.jinja2",
-		"tag_pagination_num": 5,
+        "tag_pagination_num": 2,
         "authors_template": "authors.jinja2",
-        "author_template": "author.jinja2"
-		"author_pagination_num": 5,
+        "author_template": "author.jinja2",
+        "author_pagination_num": 2
     }
 }
 

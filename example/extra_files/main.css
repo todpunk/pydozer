@@ -1,0 +1,9 @@
+.tag_list_item, .author_list_item, .author_post {
+    border: solid black 2px;
+    margin: 4px;
+}
+
+.tag, .tags, .author {
+    padding: 4px;
+    margin: 4px;
+}

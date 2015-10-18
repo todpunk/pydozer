@@ -1,0 +1,8 @@
+{% extends "base.jinja2" %}
+{% block content %}
+	<h1>{{ title }}</h1>
+	<div class="post_author">Written by <a href="author_{{ author.replace(' ', '_') }}1.html">{{ author }}</a></div>
+	<div class="posted_date">On: {{ posted_date }}</div>
+	<div class="tags">{% for tag in tags %}<span class="tag"><a href="tag_{{ tag }}1.html">{{ tag }}</a></span>{% endfor %}</div>
+	{{ content }}
+{% endblock %}

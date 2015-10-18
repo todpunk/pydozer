@@ -2,15 +2,19 @@
 <head>
 	<title>{{ title }}}</title>
 	<meta name="author" content="Tod Hansmann">
+	<link href="/main.css" rel="stylesheet" type="text/css" />
+	<script src="/main.js" type="javascript"></script>
 	{{ extra_headers }}
 </head>
 <body>
 <div id="header">
-	<img src="logo.png" />{{ title }}
+	<img src="/logo.png" />{{ title }}
 </div>
 <div id="content">
 	{% block content %}
 	{% endblock %}
 </div>
+	{% block extra_footer %}
+	{% endblock %}
 </body>
 </html>
