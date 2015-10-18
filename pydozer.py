@@ -11,6 +11,8 @@ from pprint import pprint
 import importlib
 import shutil
 from gconf import simple_config
+from flask import make_response
+from functools import update_wrapper
 
 # Argument handling
 parser = argparse.ArgumentParser(
@@ -34,9 +36,9 @@ if __name__ == '__main__':
     # This needs to either always end in .py and be stripped afterward, or stripped now and assumed to be without it
     # we opt for the latter, they're both messy.
     if config_file.endswith('.py'):
-        config_file.replace('.py', '')
+        config_file = config_file.replace('.py', '')
     if not os.path.isfile(config_file+'.py'):
-        print('config file required to exist and by a .py file, given: %s' % config_file+'.py')
+        print('config file required to exist and be a .py file, given: %s' % config_file+'.py')
         exit(1)
     else:
         config_module = importlib.import_module(config_file)
@@ -78,12 +80,21 @@ class BlogPost(object):
 app = Flask(__name__, static_folder=simple_config['output_dir'], static_url_path='')
 
 
+def nocache(f):
+    def new_func(*args, **kwargs):
+        resp = make_response(f(*args, **kwargs))
+        resp.cache_control.no_cache = True
+        return resp
+    return update_wrapper(new_func, f)
+
+
 @app.route('/hello')
 def hello_world():
     return 'Hello World!'
 
 
 @app.route('/')
+@nocache
 def root():
     return app.send_static_file(simple_config['start_page'])
 
@@ -266,10 +277,9 @@ def generate_extras():
 
 if __name__ == '__main__':
     if build:
-        print('Well, we should build here I guess')
-        from example.pages import *
-        from example.blog_posts import *
         from gconf import all_blog_posts, all_pages
+        pages = importlib.import_module(os.path.basename(simple_config['content_dir'])+'.pages')
+        blog_posts = importlib.import_module(os.path.basename(simple_config['content_dir'])+'.blog_posts')
         if os.path.exists(simple_config['output_dir']):
             shutil.rmtree(simple_config['output_dir'])
             os.makedirs(simple_config['output_dir'])
@@ -277,7 +287,6 @@ if __name__ == '__main__':
         generate_pages()
         generate_blog_posts()
     if preview:
-        print('We will run a server here when we can serve things')
         app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 5
         app.run()
 
