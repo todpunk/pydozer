@@ -31,6 +31,8 @@ if __name__ == '__main__':
     args = parser.parse_args()
     if args.preview and (not args.build):
         build = False
+    if args.build and (not args.preview):
+        preview = False
     config_file = args.config
     # This needs to either always end in .py and be stripped afterward, or stripped now and assumed to be without it
     # we opt for the latter, they're both messy.
@@ -131,7 +133,6 @@ def generate_blog_posts():
     """
     from gconf import all_blog_posts
     all_blog_posts.sort(key=lambda post: post.data['posted_date'], reverse=simple_config.get('descending', True))
-    pprint(all_blog_posts)
     blog_config = simple_config['blog_config']
     blog_template = templateEnv.get_template(blog_config['blog_template'])
     listing_template = blog_config.get('listing_template')
