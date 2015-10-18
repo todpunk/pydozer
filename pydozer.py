@@ -182,13 +182,14 @@ def generate_blog_posts():
                 output_filename = os.path.join(output_dir, 'listing' + file_num)
                 with open(output_filename, 'w+') as f:
                     f.write(listing_template.render({'posts': listings[offset:offset+page_limit],
-                                                 'title': blog_config['title'],
-                                                 'page_num': page_num,
-                                                 'total_pages': total_pages}))
+                                                     'title': blog_config['title'],
+                                                     'page_num': page_num,
+                                                     'total_pages': total_pages}))
         else:
             output_filename = os.path.join(output_dir, 'listing' + file_ext)
             with open(output_filename, 'w+') as f:
-                f.write(listing_template.render({'listings': listings}))
+                f.write(listing_template.render({'posts': listings,
+                                                 'title': blog_config['title']}))
 
     if tags_template and tag_template:
         output_filename = os.path.join(output_dir, 'tags' + file_ext)
