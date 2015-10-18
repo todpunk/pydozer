@@ -11,5 +11,5 @@ test_page.data['extra_headers'] = """
     <script type="text/javascript" src="extra.js"></script>
 """
 test_page.data['content'] = """
-    <p>This should be the second test page.  Check it out!</p>
+    <p>This should be the second test page.  Check it out!</p> <img src="/zips.gif" />
 """
