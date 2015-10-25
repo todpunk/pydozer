@@ -1,6 +1,12 @@
 # pydozer
 Simplistic static site generator in Python
 
+# Usage
+Clone the repo and add it to your PYTHONPATH, then from your content directory (where you have your configfile.py) run something like the following:
+ python /path/to/pydozer.py --conf configfile.py
+
+If you do not specify a config file, it will assume you want the simple_config.py which will likely build the example site. 
+
 # Why another site generator?
 I don't want to have to learn an entire tech stack just to spit out some HTML files.  I'm trying to save work from hand-editing something, but all the site generators I've looked at (which are many) are just full of edge cases.  So if I'm going to have to go through the effort, I might as well write something straight forward and simple for my needs.
 

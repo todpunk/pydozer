@@ -3,6 +3,7 @@ import argparse
 import datetime
 
 from flask import Flask, make_response
+import mimetypes
 import os
 import jinja2
 import dateutil.parser
@@ -49,6 +50,7 @@ if __name__ == '__main__':
 templateDir = simple_config['templates_dir']
 templateLoader = jinja2.FileSystemLoader(searchpath=templateDir)
 templateEnv = jinja2.Environment( loader=templateLoader )
+mimetypes.add_type('text/html', simple_config['default_extension'])
 
 
 class Page(object):
@@ -295,6 +297,6 @@ if __name__ == '__main__':
         generate_blog_posts()
     if preview:
         app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 5
-        app.run()
+        app.run(host='0.0.0.0')
 
 
