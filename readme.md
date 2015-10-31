@@ -2,7 +2,10 @@
 Simplistic static site generator in Python
 
 # Usage
-Clone the repo and add it to your PYTHONPATH, then from your content directory (where you have your configfile.py) run something like the following:
+Clone the repo and add it to your PYTHONPATH, and in case you don't have the required packages:
+ pip install -r requirements.txt
+
+Then from your content directory (where you have your configfile.py) run something like the following:
  python /path/to/pydozer.py --conf configfile.py
 
 If you do not specify a config file, it will assume you want the simple_config.py which will likely build the example site. 
