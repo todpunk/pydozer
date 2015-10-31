@@ -151,6 +151,7 @@ def generate_blog_posts():
         os.makedirs(output_dir)
 
     # We'll need to make all the blog posts and add to our other lists as we go
+    all_posts_list = [x.data for x in all_blog_posts]
     for blog_post in all_blog_posts:
         post_template = blog_template
         post_ext = file_ext
@@ -162,6 +163,7 @@ def generate_blog_posts():
             post_ext = blog_post.data['extension']
         output_filename = os.path.join(output_dir, blog_post.data['filename'] + post_ext)
         with open(output_filename, 'w+') as f:
+            blog_post.data['all_posts'] = all_posts_list
             f.write(post_template.render(blog_post.data))
 
         # Now populate lists, first one only if the post has all the keys needed for a listing
@@ -202,6 +204,7 @@ def generate_blog_posts():
                 output_filename = os.path.join(output_dir, 'listing' + file_num)
                 with open(output_filename, 'w+') as f:
                     f.write(listing_template.render({'posts': listings[offset:offset+page_limit],
+                                                     'all_posts': all_posts_list,
                                                      'title': blog_config['title'],
                                                      'page_num': page_num,
                                                      'total_pages': total_pages}))
@@ -209,12 +212,13 @@ def generate_blog_posts():
             output_filename = os.path.join(output_dir, 'listing' + file_ext)
             with open(output_filename, 'w+') as f:
                 f.write(listing_template.render({'posts': listings,
+                                                 'all_posts': all_posts_list,
                                                  'title': blog_config['title']}))
 
     if tags_template and tag_template:
         output_filename = os.path.join(output_dir, 'tags' + file_ext)
         with open(output_filename, 'w+') as f:
-            f.write(tags_template.render({'tags': tags, 'title': 'Tags'}))
+            f.write(tags_template.render({'tags': tags, 'title': 'Tags', 'all_posts': all_posts_list}))
         for tag, posts in tags.iteritems():
             if 'tag_pagination_num' in blog_config:
                 page_limit = blog_config['tag_pagination_num']
@@ -227,6 +231,7 @@ def generate_blog_posts():
                     output_filename = os.path.join(output_dir, tag_file + file_num)
                     with open(output_filename, 'w+') as f:
                         f.write(tag_template.render({'posts': posts[offset:offset+page_limit],
+                                                     'all_posts': all_posts_list,
                                                      'tag': tag,
                                                      'tag_file': tag_file,
                                                      'title': 'Posts for tag: ' + tag,
@@ -236,17 +241,18 @@ def generate_blog_posts():
                 output_filename = os.path.join(output_dir, 'tag_' + tag.replace(' ', '_') + file_ext)
                 with open(output_filename, 'w+') as f:
                     f.write(tag_template.render({'posts': posts,
+                                                 'all_posts': all_posts_list,
                                                  'tag': tag,
                                                  'title': 'Posts for tag: ' + tag}))
 
     if authors_template and author_template:
         output_filename = os.path.join(output_dir, 'authors' + file_ext)
         with open(output_filename, 'w+') as f:
-            f.write(authors_template.render({'authors': authors, 'title': 'Authors'}))
+            f.write(authors_template.render({'authors': authors, 'title': 'Authors', 'all_posts': all_posts_list}))
         for author, posts in authors.iteritems():
             if 'author_pagination_num' in blog_config:
                 page_limit = blog_config['author_pagination_num']
-                total_pages = int(math.floor(len(posts) / page_limit)) + 1
+                total_pages = int(math.floor(len(posts) / page_limit) + 1)
                 ranges = range(1,  total_pages + (total_pages > 1)) or [1]
                 for page_num in ranges:
                     file_num = str(page_num) + file_ext
@@ -258,12 +264,14 @@ def generate_blog_posts():
                                                         'author_file': author_file,
                                                         'title': 'Posts for author: ' + author,
                                                         'posts': posts[offset:offset+page_limit],
+                                                        'all_posts': all_posts_list,
                                                         'page_num': page_num,
-                                                        'total_pages': total_pages+1}))
+                                                        'total_pages': total_pages}))
             else:
                 output_filename = os.path.join(output_dir, 'author_' + author.replace(' ', '_') + file_ext)
                 with open(output_filename, 'w+') as f:
                     f.write(author_template.render({'author': author,
+                                                    'all_posts': all_posts_list,
                                                     'title': 'Posts for author: ' + author,
                                                     'posts': posts}))
 
