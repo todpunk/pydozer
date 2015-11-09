@@ -191,8 +191,6 @@ def generate_blog_posts():
         authors_template = templateEnv.get_template(authors_template)
         author_template = templateEnv.get_template(author_template)
 
-    # Note that we're not paginating yet.
-    # TODO: Pagination of some kind for some things?
     if listing_template:
         if 'listing_pagination_num' in blog_config:
             page_limit = blog_config['listing_pagination_num']
