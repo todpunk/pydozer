@@ -31,3 +31,11 @@ If that matches your needs too, great.  If not, I'm still time ahead, and I get 
 
 # Status
 Completely usable.  We're using it in more and more generated sites now, and we'd love to hear if you run into any snags.
+
+Some current sites generated with pydozer, some of which are open source so you can see the content files:
+http://www.todandlorna.com
+https://phonejanitor.com
+http://bluntconsultants.com
+http://networksanitationcommmittee.com
+
+Know of others? Let us know.
